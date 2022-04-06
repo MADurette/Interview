@@ -1,0 +1,229 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: service-a
+  labels:
+    app: service-a
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-a
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: service-a
+        version: v1
+    spec:
+      imagePullSecrets:
+      - name: mdurette-key
+      containers:
+        - name: service-a
+          image: registry.ford.com/mdurette/servicea:v1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              name: http
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 5
+      restartPolicy: Always
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: service-b
+  labels:
+    app: service-b
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-b
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: service-b
+        version: v1
+    spec:
+      imagePullSecrets:
+      - name: mdurette-key
+      containers:
+        - name: service-b
+          image: registry.ford.com/mdurette/serviceb:v1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              name: http
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 5
+      restartPolicy: Always
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: service-c
+  labels:
+    app: service-c
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-c
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: service-c
+        version: v1
+    spec:
+      imagePullSecrets:
+      - name: mdurette-key
+      containers:
+        - name: service-c
+          image: registry.ford.com/mdurette/servicec:v1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              name: http
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 5
+      restartPolicy: Always
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: service-d
+  labels:
+    app: service-d
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-d
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: service-d
+        version: v1
+    spec:
+      imagePullSecrets:
+      - name: mdurette-key
+      containers:
+        - name: service-d
+          image: registry.ford.com/mdurette/serviced:v1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              name: http
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 5
+      restartPolicy: Always
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: service-a
+  namespace: default
+  labels:
+    app: service-a
+    service: service-a
+spec:
+  ports:
+    - port: 8080
+      name: "http"
+      protocol: "TCP"
+  selector:
+    app: service-a
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: service-b
+  namespace: default
+  labels:
+    app: service-b
+    version: v1
+    service: service-b
+spec:
+  ports:
+    - port: 8080
+      name: "http"
+      protocol: "TCP"
+  selector:
+    app: service-b
+    version: v1
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: service-c
+  namespace: default
+  labels:
+    app: service-c
+    version: v1
+    service: service-c
+spec:
+  ports:
+    - port: 8080
+      name: "http"
+      protocol: "TCP"
+  selector:
+    app: service-c
+    version: v1
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: service-d
+  namespace: default
+  labels:
+    app: service-d
+    version: v1
+    service: service-d
+spec:
+  ports:
+    - port: 8080
+      name: "http"
+      protocol: "TCP"
+  selector:
+    app: service-d
+    version: v1

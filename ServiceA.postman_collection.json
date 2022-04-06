@@ -1,0 +1,240 @@
+{
+	"info": {
+		"_postman_id": "7b474373-b30a-4437-abf3-a86f107442fb",
+		"name": "ServiceA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Send_Message",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "Example Message"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/v1/message",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"message"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send_Message_To_ServiceA",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "ServiceA\r\nHello A"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/v1/message",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"message"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send_Message_To_ServiceB",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "ServiceB\r\nHello B"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/message",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"message"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send_Message_To_ServiceA_Then_ServiceB",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "Hello\r\nServiceB\r\nHello"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/message",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"message"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send_Message_To_ServiceA_Then_ServiceB_Then_ServiceA",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "Hello\r\nServiceB\r\nHello\r\nServiceA\r\nHello"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/message",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"message"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send_Message_Through_ServiceA_To_All_Services",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "Hello Initial\r\nServiceA\r\nHello A\r\nServiceB\r\nHello B\r\nServiceC\r\nHello C\r\nServiceD\r\nHello D"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/message",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"message"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Simulate_Traffic_Start",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/v1/traffic-simulation/start",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"traffic-simulation",
+						"start"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Simulate_Traffic_Stop",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/v1/traffic-simulation/stop",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"traffic-simulation",
+						"stop"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Repeat_Complete_Flow_Start",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "Start\r\nServiceA\r\nServiceB\r\nServiceA\r\nServiceC\r\nServiceA\r\nServiceD\r\nServiceA\r\nServiceB\r\nServiceC\r\nServiceB\r\nServiceD\r\nServiceB\r\nServiceC\r\nServiceD\r\nServiceC\r\nServiceA\r\nRepeat"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/message",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"message"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
